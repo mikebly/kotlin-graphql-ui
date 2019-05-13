@@ -1,0 +1,28 @@
+{
+  "name": "graphql-kotlin-ui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "build": "next build",
+    "deploy": "next build && sls deploy",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "next": "^8.1.0",
+    "path-match": "^1.2.4",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "serverless-apigw-binary": "^0.4.4",
+    "serverless-domain-manager": "^3.2.1",
+    "serverless-http": "^2.0.1",
+    "url": "^0.11.0"
+  }
+}
+
+id:AKIAWBIKXPSNAFFWZEWW
+secret: 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
