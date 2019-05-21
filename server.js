@@ -5,6 +5,8 @@ const next = require("next");
 const pathMatch = require("path-match");
 
 const app = next({dev});
+const handle = app.getRequestHandler();
+const { parse } = require('url');
 const server = express();
 const route = pathMatch();
 server.use('/_next', express.static(path.join(__dirname, '.next')));
