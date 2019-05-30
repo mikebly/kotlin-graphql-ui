@@ -1,4 +1,3 @@
-
 service: graphql-kotlin-ui # NOTE: update this with your service name
 
 provider:
@@ -9,16 +8,14 @@ provider:
   environment:
     NODE_ENV: ${self:custom.secrets.NODE_ENV}
 
-functions:
-  server:
-    handler: index.server
-    events:
-      - http: ANY /
-      - http: ANY /{proxy+}
-
 plugins:
   - serverless-apigw-binary
   - serverless-domain-manager
+  - serverless-nextjs-plugin
+
+package:
+  exclude:
+    - ./**
 
 custom:
   secrets: ${file(secrets.json)}
@@ -30,3 +27,5 @@ custom:
     basePath: ""
     stage: ${self:custom.secrets.NODE_ENV}
     createRoute53Record: true
+  serverless-nextjs:
+    nextConfigDir: "./"
