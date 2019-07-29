@@ -6,7 +6,7 @@ export default () => {
   return(
     <NavDiv>
       <NavBrand>
-        GraphQL-Kotlin-Mongo
+        GraphQL-Kotlin
       </NavBrand>
       <NavText>
         <Link><a href={"/graphiql"}>GraphiQL</a></Link>

@@ -15,7 +15,7 @@ class Index extends Component{
   render() {
     return(
       <Default>
-        <h1>Relationships</h1>
+        <h1>Claims</h1>
       </Default>
       )
   }
