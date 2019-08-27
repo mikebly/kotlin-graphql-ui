@@ -9,7 +9,7 @@ export default () => {
         GraphQL-Kotlin
       </NavBrand>
       <NavText>
-        <Link><a href={"/graphiql"}>GraphiQL</a></Link>
+        <Link href={"/graphiql"}><a>GraphiQL</a></Link>
       </NavText>
     </NavDiv>
   )

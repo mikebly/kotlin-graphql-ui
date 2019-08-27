@@ -4,16 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next",
+    "dev": "next -p 3001",
     "build": "next build",
+    "start": "next start",
     "deploy": "next build && sls deploy --log-level debug",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "proxy": "http://localhost:8080/graphql",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "apollo-boost": "^0.4.4",
     "express": "^4.17.1",
+    "graphql": "^14.5.3",
     "next": "^8.1.0",
     "next-aws-lambda": "^2.0.5-alpha.0",
     "path-match": "^1.2.4",
@@ -26,6 +30,7 @@
     "url": "^0.11.0"
   },
   "devDependencies": {
-    "serverless-nextjs-plugin": "^2.0.6-alpha.0"
+    "serverless-nextjs-plugin": "^2.0.6-alpha.0",
+    "babel-plugin-styled-components": "^1.10.6"
   }
 }

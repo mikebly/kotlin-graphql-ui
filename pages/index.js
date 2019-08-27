@@ -1,15 +1,30 @@
 import React, { Component } from "react";
 import Styled from "styled-components";
-// import ApolloClient from "apollo-boost";
+import ApolloClient, { gql } from "apollo-boost";
 // import { ApolloProvider } from "react-apollo";
+
 import Default from "../layouts/Default";
 
 class Index extends Component{
 
   async componentDidMount(){
-    // const client = new ApolloClient({
-    //   uri: `https://localhost:8080/graphql`
-    // })
+    const client = new ApolloClient({
+      uri: `http://localhost:8080/graphql`
+    })
+
+    const results = await client.query({
+      query: gql`
+        {
+          getAllClaims{
+            claimId
+          }
+        }
+      `
+    })
+    // Query returns a data object with each query as a separate object
+    const { data } = results
+    console.log(data)
+
   }
 
   render() {
