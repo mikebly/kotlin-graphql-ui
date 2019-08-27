@@ -23,8 +23,11 @@ class Index extends Component{
     })
     // Query returns a data object with each query as a separate object
     const { data } = results
-    console.log(data)
-
+    console.log("Return reults for the following queries:")
+    for(let key in data) {
+      console.log(key)
+      console.log(data[`${key}`])
+    }
   }
 
   render() {
