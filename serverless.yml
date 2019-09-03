@@ -1,32 +1,32 @@
-#service: graphql-kotlin-ui # NOTE: update this with your service name
-#
-#provider:
-#  name: aws
-#  runtime: nodejs8.10
-#  stage: ${self:custom.secrets.NODE_ENV}
-#  region: us-east-1
-#  environment:
-#    NODE_ENV: ${self:custom.secrets.NODE_ENV}
-#  profile: personal
-#
-#plugins:
-#  - serverless-apigw-binary
-#  - serverless-domain-manager
-#  - serverless-nextjs-plugin
-#
-#package:
-#  exclude:
-#    - ./**
-#
-#custom:
-#  secrets: ${file(secrets.json)}
-#  apigwBinary:
-#    types:
-#      - "*/*"
-#  customDomain:
-#    domainName: ${self:custom.secrets.DOMAIN}
-#    basePath: ""
-#    stage: ${self:custom.secrets.NODE_ENV}
-#    createRoute53Record: true
-#  serverless-nextjs:
-#    nextConfigDir: "./"
+service: graphql-kotlin-ui # NOTE: update this with your service name
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: ${self:custom.secrets.NODE_ENV}
+  region: us-east-1
+  environment:
+    NODE_ENV: ${self:custom.secrets.NODE_ENV}
+  profile: personal
+
+plugins:
+  - serverless-apigw-binary
+  - serverless-domain-manager
+  - serverless-nextjs-plugin
+
+package:
+  exclude:
+    - ./**
+
+custom:
+  secrets: ${file(secrets.json)}
+  apigwBinary:
+    types:
+      - "*/*"
+  customDomain:
+    domainName: ${self:custom.secrets.DOMAIN}
+    basePath: ""
+    stage: ${self:custom.secrets.NODE_ENV}
+    createRoute53Record: true
+  serverless-nextjs:
+    nextConfigDir: "./"
