@@ -2,7 +2,6 @@ import React, { Component } from "react"
 import fetch from "node-fetch"
 import { createHttpLink } from "apollo-link-http"
 import { InMemoryCache } from "apollo-cache-inmemory"
-import Styled from "styled-components"
 import ApolloClient from "apollo-client"
 import gql from "graphql-tag"
 import Default from "../layouts/Default"
@@ -35,7 +34,11 @@ function Claims() {
     <ul>
       {
         claims.map((claim,index) => { return (
-          <li key={index}>Id:{claim.claimId}, Loss Date: {claim.lossDate}</li>
+          <li key={index}>
+            Id: {claim.claimId}
+            <br />
+            Loss Date: {claim.lossDate}
+          </li>
         )})
       }
     </ul>
