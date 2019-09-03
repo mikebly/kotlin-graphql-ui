@@ -1,8 +1,46 @@
 import React, { Component } from "react"
+import fetch from "node-fetch"
+import { createHttpLink } from "apollo-link-http"
+import { InMemoryCache } from "apollo-cache-inmemory"
 import Styled from "styled-components"
-import ApolloClient, { gql } from "apollo-boost"
-// import { ApolloProvider } from "react-apollo"
+import ApolloClient from "apollo-client"
+import gql from "graphql-tag"
 import Default from "../layouts/Default"
+import { ApolloProvider, useQuery } from "@apollo/react-hooks";
+
+const client = new ApolloClient({
+  link: createHttpLink({
+    uri: `http://localhost:8080/graphql`,
+    fetch: fetch
+  }),
+  cache: new InMemoryCache()
+})
+
+const GET_ALL_CLAIMS = gql`
+  {
+    getAllClaims {
+      claimId
+      lossDate
+    }
+  }
+`
+
+function Claims() {
+  const { loading, error, data } = useQuery(GET_ALL_CLAIMS)
+  if (loading) return "Getting claims data..."
+  if (error) return `Oh no! Error: ${error}`
+  console.log(data)
+  const { getAllClaims: claims } = data
+  return (
+    <ul>
+      {
+        claims.map((claim,index) => { return (
+          <li key={index}>Id:{claim.claimId}, Loss Date: {claim.lossDate}</li>
+        )})
+      }
+    </ul>
+  )
+}
 
 class Index extends Component {
 
@@ -10,50 +48,14 @@ class Index extends Component {
       claims: []
   }
 
-  async componentDidMount() {
-    const client = new ApolloClient({
-      uri: `http://localhost:8080/graphql`
-    })
-
-    const results = await client.query({
-      query: gql`
-        {
-          getAllClaims {
-            claimId
-            lossDate
-          }
-        }
-      `
-    })
-
-    // Query returns a data object with each query as a separate object
-    const { data } = results
-    console.log("Return results for the following queries:")
-    for(let key in data) {
-      if (data.hasOwnProperty(key)) {
-        console.log(key)
-        console.log(data[key])
-        let newClaims = data[key]
-        console.log(newClaims)
-        for (let claim in newClaims) {
-          this.setState({ claims: [...this.state.claims, newClaims[claim]] })
-        }
-      }
-    }
-  }
-
   render() {
     return(
-      <Default>
-        <h1>Claims</h1>
-        <ul>
-          {
-            this.state.claims.map((claim,index) => { return (
-              <li key={index}>Id:{claim.claimId}, Loss Date: {claim.lossDate}</li>
-            )})
-          }
-        </ul>
-      </Default>
+      <ApolloProvider client={client}>
+        <Default>
+          <h1>Claims</h1>
+          <Claims />
+        </Default>
+      </ApolloProvider>
       )
   }
 }
